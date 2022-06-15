@@ -2,11 +2,19 @@
 txn ApplicationID
 int 0
 ==
-bnz main_l8
+bnz main_l18
 txn OnCompletion
 int NoOp
 ==
-bnz main_l5
+bnz main_l9
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l8
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l7
 txn OnCompletion
 int OptIn
 ==
@@ -14,51 +22,242 @@ txn OnCompletion
 int CloseOut
 ==
 ||
-txn OnCompletion
-int UpdateApplication
-==
-||
-txn OnCompletion
-int DeleteApplication
-==
-||
-bnz main_l4
+bnz main_l6
 err
-main_l4:
+main_l6:
 int 0
 return
-main_l5:
-txna ApplicationArgs 0
-byte "deposit"
-==
-bnz main_l7
-err
 main_l7:
-global GroupSize
-int 1
-==
-assert
-txn NumAppArgs
-int 2
-==
-assert
-itxn_begin
-int pay
-itxn_field TypeEnum
-txn Sender
-itxn_field Sender
 global CurrentApplicationAddress
-itxn_field Receiver
-txna ApplicationArgs 1
-btoi
-itxn_field Amount
-int 0
-itxn_field Fee
+txna Assets 0
+asset_holding_get AssetBalance
+store 1
+store 0
+global CurrentApplicationAddress
+txna Assets 1
+asset_holding_get AssetBalance
+store 3
+store 2
 txn Sender
-itxn_field RekeyTo
-itxn_submit
+byte "Creator"
+app_global_get
+==
+assert
+txna Assets 0
+byte "wNGN"
+app_global_get
+==
+assert
+txna Assets 1
+byte "wGHC"
+app_global_get
+==
+assert
+load 0
+int 0
+==
+assert
+load 2
+int 0
+==
+assert
 int 1
 return
 main_l8:
+txn Sender
+byte "Creator"
+app_global_get
+==
+return
+main_l9:
+txna ApplicationArgs 0
+byte "contract_optin"
+==
+bnz main_l17
+txna ApplicationArgs 0
+byte "wNGN"
+==
+bnz main_l16
+txna ApplicationArgs 0
+byte "wGHC"
+==
+bnz main_l15
+txna ApplicationArgs 0
+byte "withdraw"
+==
+bnz main_l14
+err
+main_l14:
+txn Sender
+byte "Creator"
+app_global_get
+==
+assert
+txna Assets 0
+byte "wNGN"
+app_global_get
+==
+txna Assets 1
+byte "wGHC"
+app_global_get
+==
+&&
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field AssetReceiver
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field AssetReceiver
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+txna Assets 1
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l15:
+global GroupSize
+int 2
+==
+gtxn 0 TypeEnum
+int axfer
+==
+&&
+gtxn 0 AssetReceiver
+global CurrentApplicationAddress
+==
+&&
+gtxn 0 CloseRemainderTo
+global ZeroAddress
+==
+&&
+txn NumAssets
+int 1
+==
+&&
+gtxn 0 RekeyTo
+global ZeroAddress
+==
+&&
+assert
+gtxna 1 Assets 0
+byte "wNGN"
+app_global_get
+==
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field AssetReceiver
+gtxn 0 AssetAmount
+itxn_field AssetAmount
+gtxna 1 Assets 0
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l16:
+global GroupSize
+int 2
+==
+gtxn 0 TypeEnum
+int axfer
+==
+&&
+gtxn 0 AssetReceiver
+global CurrentApplicationAddress
+==
+&&
+gtxn 0 CloseRemainderTo
+global ZeroAddress
+==
+&&
+txn NumAssets
+int 1
+==
+&&
+gtxn 0 RekeyTo
+global ZeroAddress
+==
+&&
+assert
+gtxna 1 Assets 0
+byte "wGHC"
+app_global_get
+==
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field AssetReceiver
+gtxn 0 AssetAmount
+itxn_field AssetAmount
+gtxna 1 Assets 0
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l17:
+txn Sender
+byte "Creator"
+app_global_get
+==
+assert
+txna Assets 0
+byte "wNGN"
+app_global_get
+==
+txna Assets 1
+byte "wGHC"
+app_global_get
+==
+&&
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+itxn_begin
+int axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field AssetAmount
+txna Assets 1
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l18:
+byte "Creator"
+txn Sender
+app_global_put
+byte "wNGN"
+txna Assets 0
+app_global_put
+byte "wGHC"
+txna Assets 1
+app_global_put
 int 1
 return
