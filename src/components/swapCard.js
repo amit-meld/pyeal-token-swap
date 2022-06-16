@@ -1,7 +1,9 @@
 import { Form, Button, Dropdown } from 'react-bootstrap'
 import {StyleSheet, css} from 'aphrodite'
 import swap from  '../images/swap.png'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import SwapForm from './swapForm'
+import Swap from './swap'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -57,7 +59,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   textLabel: {
-    color: 'white'
+    color: 'white',
+    marginTop: '16px'
   },
   labelContainer: {
     display: 'flex',
@@ -80,68 +83,76 @@ const styles = StyleSheet.create({
 })
 
 export default function SwapCard() {
-  const [selected, setselected] = useState(false)
-  const [tokenA, setTokenA] = useState(0)
-  const [tokenB, setTokenB] = useState(0)
-  const [balance, setBalance] = useState(0)
-  const [tokenABal, tokenBBal] = useState(0)
+  const [amount, setAmount] = useState(0)
+  const [ selected, setSelected] = useState("Select token")
+  const [receiveToken, setReceiveToken] = useState("Select")
+  const userAccount = useRef()
+  // const [ token, setToken] = useState(null)
+
+  const handleAmount = (e) =>{
+    setAmount(e.target.value)
+  }
+  const handleDropDown = (e) => {
+    setSelected(e.target.value)
+  }
+
+  const handleReceiveDropDown = (e) => {
+      // setReceiveToken(e.target.value)
+    if(selected === e.target.value){
+      setReceiveToken("wGHC")
+    }else if(selected === e.target.value){
+      setReceiveToken("wNGN")
+    }else if(receiveToken === "wNGN"){
+      setSelected("wGHC")
+    }else if(receiveToken === "wGHC"){
+      setSelected("wNGN")
+    }
+  }
+
+ const handleSwap = async () => {
+    //Swap wNGN
+    if(selected === "wNGN"){
+      return await Swap(95523624,95523752, "wNGN", amount, userAccount)
+    }else{
+       // Swap wGHC
+      return await Swap(95523752,95523624, "wGHC", amount, userAccount)
+    }  
+}
+
   return (
   <div>
     <h2 className={css(styles.title)}>Swap Tokens</h2>
     <div className={css(styles.wrapper)}>
-      <Form>
-      <div className={css(styles.labelContainer)}>
-          <label className={css(styles.textLabel)}>You Send</label>
-          <label className={css(styles.textLabel)}>Balance: 5 Algo</label>
-        </div>
-        <div className={css(styles.inputContainer)}>
-          <Form.Group className="mb-3" controlId="formBasicAmount">
-            <Form.Control className={css(styles.inputForm)} value={tokenA} onChange={(e) => setTokenA(e.target.value)} type="dropdown" placeholder="Amount" />
-          </Form.Group>
-          <Dropdown className={css(styles.dropdownInput)} >
-            <Dropdown.Toggle variant="success" id="dropdown-basic" className={css(styles.dropdownToggle)} >
-              Select token
-            </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Alice Token</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Bob Token</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-        </div>
-          <div className={css(styles.labelBottom)}>
-            <label className={css(styles.textLabel)}>Wallet: 10,000</label>
-            <Button className={css(styles.maxButton)}>Max</Button>
-          </div>
+      <div>
+        <SwapForm 
+          title="You Send"
+          handleAmountChange= {handleAmount}
+          amountValue= {amount} 
+          handleDropdownChange={handleDropDown} 
+          dropdownValue = {selected}
+          dropdownID = "tokenA"
+       />
 
-        <div className={css(styles.swapImageContainer)}>
-          <img src={swap} alt='swap' width='48px' height='48px' />
-        </div>
-
-        <label className={css(styles.textLabel)}>You Get</label>  
-        <div className={css(styles.inputContainer)}>
-          <Form.Group className="mb-3" controlId="formBasicAmount">
-            <Form.Control className={css(styles.inputForm)} value={tokenB} onChange={(e) => setTokenB(e.target.value)}  type="dropdown" placeholder="Amount" />
-          </Form.Group>
-          <Dropdown className={css(styles.dropdownInput)} >
-            <Dropdown.Toggle variant="success" id="dropdown-basic" className={css(styles.dropdownToggle)} >
-              Select token
-            </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Alice Token</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Bob Token</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-        </div>
-          <div className={css(styles.labelBottom)}>
-            <label className={css(styles.textLabel)}>Wallet: 10,000</label>
-            <Button className={css(styles.maxButton)}>Max</Button>
+          <div className={css(styles.swapImageContainer)}>
+            <img src={swap} alt='swap' width='48px' height='48px' />
           </div>
-     
-        <Button className={css(styles.swapButton)} variant="primary" type="submit">
+        <SwapForm 
+        title="You Get"
+        handleAmountChange= {handleAmount}
+        amountValue= {amount} 
+        handleDropdownChange={handleReceiveDropDown} 
+        dropdownValue = {receiveToken}
+        // state ={true}
+        dropdownID = "tokenB"
+        />
+        <Button className={css(styles.swapButton)} variant="primary" type="submit" onClick={handleSwap}>
           Swap Now
         </Button>
-      </Form>
+        <p className={css(styles.textLabel)}>Optin to wNGN (95523624) and wGHC (95523752)</p>
+      </div>
     </div>
   </div>  
   )
 }
+
+// dropdownValue = {selected == "wNGN" ? "wGHC" : "wNGC"

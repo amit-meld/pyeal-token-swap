@@ -25,8 +25,10 @@ export default function Header () {
     <div>
       <div className={css(styles.wrapper)}>
       <h4 className={css(styles.title)}>OneSwap</h4>
+      <div>
         <Button className={css(styles.connectbtn)} onClick= {() => setWallet(!wallet)}>Connect Wallet</Button>
         <ConnectWallet show={wallet} onHide={() => setWallet(false)}/>
+      </div>     
       </div>
     </div>
     
