@@ -24,29 +24,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white'
   },
-  inputForm: {
-    width: '100%',
-    backgroundColor: '#19434E',
-    borderColor: '#19434E',
-    color: 'white',
-    '@media (max-width: 768px)': {
-      width: '100%',
-      margin: 'auto',
-    }
-  },
-  inputContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '10px'
-  },
-  dropdownInput: {
-    // width: '50%',
-    margin: '0',
-  },
-  dropdownToggle: {
-    backgroundColor: '#19434E',
-    borderColor: '#19434E'
-  },
   swapButton: {
     width: '100%',
     backgroundColor: '#5FCA74',
@@ -62,24 +39,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: '16px'
   },
-  labelContainer: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  labelBottom: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  maxButton: {
-    backgroundColor: '#E5B50B',
-    borderColor: '#E5B50B',
-    padding: '4px',
-    borderRadius: '5px',
-    color: 'black',
-    fontSize: '12px',
-    marginLeft: '5px'
-  }
-
 })
 
 export default function SwapCard() {
