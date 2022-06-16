@@ -41,12 +41,10 @@ To test the code
 Here is a [demo link]() to the deployed Application on vercel.
 
 # License
-Distributed under the MIT License. See for more information. [LICENSE]()
+Distributed under the MIT License. See for more information. [LICENSE](https://github.com/gconnect/pyeal-token-swap/blob/master/LICENSE)
 
 # Blog and Video Tutorial
 For more details you can checkout the blog post [here]() . And here is the link to the [youtube demo]()
-
-# Disclaimer
 
 # Warning
 This project is not audited and should not be used in a production environment.
