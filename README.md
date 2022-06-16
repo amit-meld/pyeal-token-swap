@@ -25,7 +25,7 @@ The JavaScript SDK will be used for deploying the smart contract code.
 - [Vs Code](https://code.visualstudio.com/) or any IDE of your choice
 - [Node Package Manager](https://nodejs.org/download/)
 - [Create React App](https://github.com/facebook/create-react-app) . This creates a react boilerplate app.
-- [Styled Components](https://styled-components.com/)
+- [Aphrodite css](https://github.com/Khan/aphrodite) For CSS styling
 - [Python 3.6 or higher](https://www.python.org/downloads/)
 - [Pyteal Installation](https://pyteal.readthedocs.io/en/stable/installation.html)
 
