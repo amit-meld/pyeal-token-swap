@@ -1,6 +1,6 @@
 /*global AlgoSigner*/
 import algosdk from 'algosdk';
-const {APPID, CONTRACT_ADDRESS} = require("../constants")
+import {APPID, CONTRACT_ADDRESS} from "../constants"
 
 function EncodeBytes(utf8String) {
   let enc = new TextEncoder()

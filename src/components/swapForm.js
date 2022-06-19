@@ -1,8 +1,6 @@
 import { Form, Button, Dropdown } from 'react-bootstrap'
-import {StyleSheet, css} from 'aphrodite'
+import { StyleSheet, css } from 'aphrodite'
 import { useState } from 'react'
-import Select from 'react-select';
-import swap from  '../images/swap.png'
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -84,10 +82,7 @@ const styles = StyleSheet.create({
   }
 
 })
-export default function SwapForm ({title, handleAmountChange, amountValue, handleDropdownChange, dropdownValue, state, dropdownID}){
-  const [amount, setAmount] = useState(0)
-  const [ select, setSelected] = useState("Select token")
-  const [ token, setToken] = useState(null)
+export default function SwapForm ({title, handleAmountChange, amountValue, handleDropdownChange, dropdownValue, state, dropdownID, test}){
 
   const options = [
     { value: 'Select token', label: 'Select token' },

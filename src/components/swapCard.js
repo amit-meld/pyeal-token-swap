@@ -1,7 +1,7 @@
 import { Form, Button, Dropdown } from 'react-bootstrap'
-import {StyleSheet, css} from 'aphrodite'
+import { StyleSheet, css } from 'aphrodite'
 import swap from  '../images/swap.png'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import SwapForm from './swapForm'
 import Swap from './swap'
 
@@ -46,7 +46,6 @@ export default function SwapCard() {
   const [ selected, setSelected] = useState("Select token")
   const [receiveToken, setReceiveToken] = useState("Select")
   const userAccount = useRef()
-  // const [ token, setToken] = useState(null)
 
   const handleAmount = (e) =>{
     setAmount(e.target.value)
@@ -55,17 +54,8 @@ export default function SwapCard() {
     setSelected(e.target.value)
   }
 
-  const handleReceiveDropDown = (e) => {
-      // setReceiveToken(e.target.value)
-    if(selected === e.target.value){
-      setReceiveToken("wGHC")
-    }else if(selected === e.target.value){
-      setReceiveToken("wNGN")
-    }else if(receiveToken === "wNGN"){
-      setSelected("wGHC")
-    }else if(receiveToken === "wGHC"){
-      setSelected("wNGN")
-    }
+  const switchAsset = () => {
+    selected === "wNGN" ? setReceiveToken("wGHC") : setReceiveToken("wNGN")
   }
 
  const handleSwap = async () => {
@@ -77,6 +67,10 @@ export default function SwapCard() {
       return await Swap(95523752,95523624, "wGHC", amount, userAccount)
     }  
 }
+
+useEffect(() => {
+  switchAsset() 
+}, [selected, receiveToken])
 
   return (
   <div>
@@ -99,7 +93,7 @@ export default function SwapCard() {
         title="You Get"
         handleAmountChange= {handleAmount}
         amountValue= {amount} 
-        handleDropdownChange={handleReceiveDropDown} 
+        handleDropdownChange={handleDropDown}
         dropdownValue = {receiveToken}
         // state ={true}
         dropdownID = "tokenB"
@@ -113,5 +107,3 @@ export default function SwapCard() {
   </div>  
   )
 }
-
-// dropdownValue = {selected == "wNGN" ? "wGHC" : "wNGC"
