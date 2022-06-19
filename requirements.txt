@@ -1,8 +1,9 @@
 cffi==1.15.0
 msgpack==1.0.3
+pip==22.0.4
 py-algorand-sdk==1.13.1
 pycparser==2.21
 pycryptodomex==3.14.1
 PyNaCl==1.5.0
-pyteal==0.10.1
-six @ file:///AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-110/six-1.15.0-py2.py3-none-any.whl
+pyteal==0.12.1
+setuptools==58.1.0
