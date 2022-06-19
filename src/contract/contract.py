@@ -1,5 +1,3 @@
-from tokenize import group
-from unicodedata import decimal
 from pyteal import *
 
 def approval_program():

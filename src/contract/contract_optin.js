@@ -2,12 +2,9 @@ require('dotenv').config({path: '../../.env'})
 const algosdk = require('algosdk');
 // const EncodeBytes = require('./utils')
 const {APPID} = require("../constants")
+const EncodeBytes = require("../utils")
 
-function EncodeBytes(utf8String) {
-  let enc = new TextEncoder()
-  return enc.encode(utf8String)
-}
-async function initialise() {
+async function contractOptin() {
 
     try {
       const token = {"X-API-Key": process.env.API_KEY}
@@ -61,4 +58,4 @@ async function initialise() {
     process.exit();
 };
 
-initialise();
+contractOptin();

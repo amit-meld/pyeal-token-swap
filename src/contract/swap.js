@@ -1,13 +1,8 @@
 require('dotenv').config({path: '../../.env'});
 const algosdk = require('algosdk');
-// const EncodeBytes = require('../utils');
-// const {APPID, CONTRACT_ADDRESS} = require( '../constants');
 const {APPID, CONTRACT_ADDRESS} = require("../constants")
+const EncodeBytes = require("../utils")
 
-function EncodeBytes(utf8String) {
-  let enc = new TextEncoder()
-  return enc.encode(utf8String)
-}
 async function Swap(assetId, foreignAssedId, tokenArg) {
 
     try {
@@ -29,8 +24,6 @@ async function Swap(assetId, foreignAssedId, tokenArg) {
       const revocationTarget = undefined;
       const note = undefined;
       const amount = 10;
-      // const CONTRACT_ADDRESS = CONTRACT_ADDRESS
-      // const APPID = APPID
 
       const appArgs = [];
       appArgs.push(EncodeBytes(tokenArg));
@@ -84,4 +77,7 @@ async function Swap(assetId, foreignAssedId, tokenArg) {
     process.exit();
 };
 
-module.exports = Swap;
+//Swap wNGN
+await Swap(95523624,95523752, "wNGN")
+// Swap wGHC
+await Swap(95523752,95523624, "wGHC")
