@@ -1,5 +1,5 @@
-# Swap Dapp built with PyTeal and React
-The swap Dapp allows users to swap two Algorand Standard Assets (ASA). To swap the sender needs to first optin to the asset. The sender sends a certain value of one of the asset and receive same value of the other asset.
+# Token Swap Dapp built with PyTeal and React
+The Token swap Dapp allows users to swap two Algorand Standard Assets (ASA). To swap the sender needs to first optin to the asset. The sender sends a certain value of one of the asset and receive same value of the other asset.
 
 The smart contract was written in PyTeal and the frontend with the Algorand Java Script SDK and React. Transactions are signed on the UI using AlgoSigner.
 
