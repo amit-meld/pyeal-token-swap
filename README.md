@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Token Swap Dapp built with PyTeal and React
+The Token swap Dapp allows users to swap two Algorand Standard Assets (ASA). To swap the sender needs to first optin to the asset. The sender sends a certain value of one of the asset and receive same value of the other asset.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The smart contract was written in PyTeal and the frontend with the Algorand Java Script SDK and React. Transactions are signed on the UI using AlgoSigner.
 
-## Available Scripts
+## PyTeal Smart Contract
+PyTeal is a python library for generating TEAL programs that provides a convenient and familiar syntax.
+This handles building of the smart contract with PyTeal. The smart contract code can be found in `src/contract/contract.py`
 
-In the project directory, you can run:
+## TEAL
+TEAL is Transaction Execution Approval Language. PyTeal code will be compiled to TEAL. The TEAL code consist of the Approval Program and Clear State Program.
+The Approval program can be found in `src/contract/approval.teal` and the Clear State Program can be found in `src/contract/clear_state.teal`
 
-### `npm start`
+## Frontend Interactions with React
+To interact with the application the UI code can be found in `src/components`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## AlgoSigner
+- The AlgoSigner will be used for signing the transactions on the demo app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Deploy Smart Contract with the Algorand JavaScript SDK
+The JavaScript SDK will be used for deploying the smart contract code.
 
-### `npm test`
+# Setup Requirements
+- [Algorand JavaScript SDK](https://github.com/algorand/js-algorand-sdk)
+- [Vs Code](https://code.visualstudio.com/) or any IDE of your choice
+- [Node Package Manager](https://nodejs.org/download/)
+- [Create React App](https://github.com/facebook/create-react-app) . This creates a react boilerplate app.
+- [Aphrodite css](https://github.com/Khan/aphrodite) For CSS styling
+- [Python 3.6 or higher](https://www.python.org/downloads/)
+- [Pyteal Installation](https://pyteal.readthedocs.io/en/stable/installation.html)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Run the Code
+To test the code 
+- Fork the repository 
+- Do `npm install` this will install all required dependencies. (If you encounter any issue after doing this you can delete the node module folder and do `npm install` again)
+- run `npm start` to start the local server at localhost:3000
 
-### `npm run build`
+# Demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Here is a [demo link]() to the deployed Application on vercel.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# License
+Distributed under the MIT License. See for more information. [LICENSE](https://github.com/gconnect/pyeal-token-swap/blob/master/LICENSE)
 
-### `npm run eject`
+# Blog and Video Tutorial
+For more details you can checkout the blog post [here](https://developer.algorand.org/tutorials/swap-dapp-built-with-pyteal-and-react/) . And here is the link to the [youtube demo]()
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Warning
+This project is not audited and should not be used in a production environment.
