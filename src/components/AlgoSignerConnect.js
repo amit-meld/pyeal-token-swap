@@ -1,4 +1,3 @@
-
 const getUserAccount = async () =>{
   userAccount.current =  await AlgoSigner.accounts({
        ledger: 'TestNet'

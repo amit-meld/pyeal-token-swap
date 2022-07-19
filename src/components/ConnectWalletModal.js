@@ -1,5 +1,5 @@
 /*global AlgoSigner*/
-import React, {useRef} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { StyleSheet, css } from 'aphrodite'
 
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
 export default function ConnectWallet(props) {
   const userAccount = useRef()
-
+ 
   const connectWithAlgoSigner = async () =>{
     let resp = await AlgoSigner.connect()
         console.log(resp)
@@ -43,13 +43,13 @@ export default function ConnectWallet(props) {
   return(
     <div>
        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered className={css(styles.modal)}>
-        <Modal.Header closeButton>
-          <Modal.Title className={css(styles.title)}>Connect Wallet</Modal.Title>
+        <Modal.Header closeButton>   
+        <Modal.Title className={css(styles.title)}>Connect Wallet</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Button className={css(styles.connectBtn)} onClick={connectWithAlgoSigner}>AlgoSigner</Button>
-          <Button className={css(styles.connectBtn)}>MyAlgo Wallet</Button>
-          <Button className={css(styles.connectBtn)}>Pera Wallet </Button>
+          {/* <Button className={css(styles.connectBtn)}>MyAlgo Wallet</Button>
+          <Button className={css(styles.connectBtn)}>Pera Wallet </Button> */}
         </Modal.Body>
       </Modal>
     </div>

@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 export default function SwapForm ({title, handleAmountChange, amountValue, handleDropdownChange, dropdownValue, state, dropdownID, test}){
 
   const options = [
-    { value: 'Select token', label: 'Select token' },
+    // { value: 'Select token', label: 'Select token' },
     { value: 'wNGN', label: 'wNGN' },
     { value: 'wGHC', label: 'wGHC' },
   ];

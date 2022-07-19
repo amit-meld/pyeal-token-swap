@@ -72,6 +72,7 @@ export default async function Swap(assetId, foreignAssedId, tokenArg, amt, userA
         const binarySignedTxs = signedTxs.map((tx) => AlgoSigner.encoding.base64ToMsgpack(tx.blob));
         const id = await algodClient.sendRawTransaction(binarySignedTxs).do();
         console.log(id)
+        localStorage.setItem("txId", id.txId)
     }
     catch (err) {
         console.log("err", err);

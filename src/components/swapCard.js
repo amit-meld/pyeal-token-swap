@@ -45,6 +45,9 @@ export default function SwapCard() {
   const [amount, setAmount] = useState(0)
   const [ selected, setSelected] = useState("Select token")
   const [receiveToken, setReceiveToken] = useState("Select")
+  const [showId, setShowId] = useState(false)
+  const [txid, setTxId] = useState("")
+
   const userAccount = useRef()
 
   const handleAmount = (e) =>{
@@ -66,11 +69,30 @@ export default function SwapCard() {
        // Swap wGHC
       return await Swap(95523752,95523624, "wGHC", amount, userAccount)
     }  
-}
+  }
 
-useEffect(() => {
-  switchAsset() 
-}, [selected, receiveToken])
+  const transTxt = () => {
+    if (txid) {
+      return `'TxId' ${txid.substring(0,15)} '...`
+    }
+    return ''
+  }
+
+  const clearStorage = () => localStorage.clear("txId")
+
+
+  useEffect(() => {
+    switchAsset() 
+
+    const id = localStorage.getItem("txId")
+    console.log(id)
+    setTxId(id)
+
+    if(txid !== ""){
+      setShowId(true)
+    }
+    
+  }, [selected, receiveToken])
 
   return (
   <div>
@@ -102,6 +124,9 @@ useEffect(() => {
           Swap Now
         </Button>
         <p className={css(styles.textLabel)}>Optin to wNGN (95523624) and wGHC (95523752)</p>
+        <a href={`https://testnet.algoexplorer.io/tx/${txid}`} onClick={clearStorage}>{txid ? `${txid.substring(0,15)}...` : ''}</a>
+        {/* <a href={`https://testnet.algoexplorer.io/tx/${txid}`} onClick={clearStorage}>{`TxId: ${txid.substring(0,15)}... ` }</a> */}
+        {showId}
       </div>
     </div>
   </div>  
